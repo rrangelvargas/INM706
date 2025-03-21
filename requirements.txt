@@ -1,0 +1,16 @@
+--index-url https://pypi.org/simple
+pillow
+librosa
+numpy
+matplotlib
+pandas
+scikit-learn
+scikit-image
+seaborn
+ipython
+
+
+--index-url https://download.pytorch.org/whl/cu126
+torch
+torchaudio
+torchvision
