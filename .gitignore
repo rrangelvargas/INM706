@@ -8,3 +8,11 @@ output/
 .ipynb_checkpoints/
 .history/*
 .ipynb_checkpoints/*
+__pycache__/
+__pycache__/*
+*.pyc
+*.pyo
+*.pyd
+*.pyw
+*.pyz
+*.pywz
