@@ -29,6 +29,9 @@ if __name__ == "__main__":
         for dropout_rate in dropout_rates:
             for weight_decay in weight_decays:
                 for batch_size in batch_sizes:
+                    
+                    torch.cuda.empty_cache()
+
                     # logger.log(f"Learning Rate: {learning_rate}")
                     # logger.log(f"Dropout Rate: {dropout_rate}")
                     # logger.log(f"Weight Decay: {weight_decay}")

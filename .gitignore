@@ -1,6 +1,10 @@
 .venv
-.history
+.history/
 data/
 wandb/
 output/
 *.pth
+*.csv
+.ipynb_checkpoints/
+.history/*
+.ipynb_checkpoints/*
