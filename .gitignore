@@ -1,6 +1,5 @@
 .venv
 .history/
-data/
 wandb/
 output/
 *.pth
