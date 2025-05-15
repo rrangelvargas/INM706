@@ -4,8 +4,8 @@ This repository contains code for exploring, preprocessing, and testing a deep l
 
 ## Dataset Setup
 
-1. **Download the GTZAN dataset** from the following link:  
-   https://www.kaggle.com/datasets/andradaolteanu/gtzan-dataset-music-genre-classification?resource=download
+1. **Download the GTZAN dataset** from the following link:
+   [Download Here](https://www.kaggle.com/datasets/andradaolteanu/gtzan-dataset-music-genre-classification?resource=download)
 
 2. **Unzip the downloaded file.**
 
