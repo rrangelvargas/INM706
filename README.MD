@@ -1,8 +1,8 @@
-## Music Genre Classification 
+# Music Genre Classification
 
 This repository contains code for exploring, pre-processing, and testing CNN+RNN pipelines for music genre classification using the [GTZAN dataset](https://www.kaggle.com/datasets/andradaolteanu/gtzan-dataset-music-genre-classification?resource=download).
 
-### Dataset Setup
+## Dataset Setup
 
 1. **Download the GTZAN dataset** from the following link:
    [Download Here](https://www.kaggle.com/datasets/andradaolteanu/gtzan-dataset-music-genre-classification?resource=download)
@@ -50,3 +50,13 @@ This notebook is used for **inference and evaluation** of the final trained mode
 - Test a single file or the given sample files  
 - Evaluate **generalisation** to new musical styles or eras  
 - Check how confidently and accurately the model performs on unfamiliar data  
+
+## Logs
+
+The wandb runs and logs can be found at:
+
+[Model Comparison](https://wandb.ai/rrangelvargas22-city-university-of-london/Model-Comparison?nw=nwuserrrangelvargas22)
+
+[Grid Search](https://wandb.ai/rrangelvargas22-city-university-of-london/Grid-Search?nw=nwuserrrangelvargas22)
+
+[best Model](https://wandb.ai/rrangelvargas22-city-university-of-london/Best-Model?nw=nwuserrrangelvargas22)
