@@ -1,6 +1,39 @@
-# INM706 - Deep Learning for Sequence Analysis
+# Music Genre Classification with GTZAN Dataset
 
-Rodrigo Rangel Vargas dos Santos -  240045688
+This repository contains code for exploring, preprocessing, and testing a deep learning pipeline for music genre classification using the [GTZAN dataset](https://www.kaggle.com/datasets/andradaolteanu/gtzan-dataset-music-genre-classification?resource=download).
 
-Fareesah Hussain - 240063950
+## Dataset Setup
+
+1. **Download the GTZAN dataset** from the following link:  
+   https://www.kaggle.com/datasets/andradaolteanu/gtzan-dataset-music-genre-classification?resource=download
+
+2. **Unzip the downloaded file.**
+
+3. **Move the contents inside the unzipped folder** (e.g., the `genres_original/` folder) into the existing `data/` directory in this repository.  
+   Do **not** replace or delete the existing `data/` folder — just move the dataset contents into it.
+
+*This structure ensures compatibility with all file paths used in the code.*
+
+## Jupyter Notebooks
+
+### 1. `EDA & Pre-processing.ipynb`
+
+This notebook walks through the complete **exploratory data analysis (EDA)** and **preprocessing** pipeline. It includes:
+
+- Verifying genre folder structure and file counts  
+- Visualising Mel spectrograms for representative audio samples  
+- Segmenting audio into overlapping chunks (e.g., 4s with 2s overlap)  
+- Extracting and resizing Mel spectrograms for model input  
+- Label encoding and splitting data into train/test sets  
+- Converting to PyTorch tensors and validating shapes  
+
+### 2. `test.ipynb`
+
+This notebook is used for **inference and evaluation** of the final trained model:
+
+- Load and test the model on **new or modern audio samples** outside the training set  
+- Evaluate **generalisation** to new musical styles or eras  
+- Check how confidently and accurately the model performs on unfamiliar data  
+
+
 
