@@ -70,6 +70,18 @@ class HybridCNNLSTM(nn.Module):
         train_accs = []
         test_accs = []
 
+        # Log model architecture and parameters if logger is available
+        if logger:
+            logger.log({
+                "model/architecture": str(self),
+                "model/parameters": sum(p.numel() for p in self.parameters()),
+                "model/trainable_parameters": sum(p.numel() for p in self.parameters() if p.requires_grad),
+                "training/epochs": epochs,
+                "training/batch_size": train_loader.batch_size,
+                "training/dataset_size": len(train_loader.dataset),
+                "training/test_size": len(test_loader.dataset)
+            })
+
         progress_bar = tqdm(range(epochs), desc='Training Progress')
         for epoch in progress_bar:
             train_loss, train_acc = train_epoch(self, train_loader, criterion, optimizer)
@@ -179,6 +191,18 @@ class HybridCNNGRU(nn.Module):
         train_losses = []
         train_accs = []
         test_accs = []
+
+        # Log model architecture and parameters if logger is available
+        if logger:
+            logger.log({
+                "model/architecture": str(self),
+                "model/parameters": sum(p.numel() for p in self.parameters()),
+                "model/trainable_parameters": sum(p.numel() for p in self.parameters() if p.requires_grad),
+                "training/epochs": epochs,
+                "training/batch_size": train_loader.batch_size,
+                "training/dataset_size": len(train_loader.dataset),
+                "training/test_size": len(test_loader.dataset)
+            })
 
         progress_bar = tqdm(range(epochs), desc='Training Progress')
         for epoch in progress_bar:
@@ -302,6 +326,18 @@ class HybridCNNGRUWithAttention(nn.Module):
         train_accs = []
         test_accs = []
 
+        # Log model architecture and parameters if logger is available
+        if logger:
+            logger.log({
+                "model/architecture": str(self),
+                "model/parameters": sum(p.numel() for p in self.parameters()),
+                "model/trainable_parameters": sum(p.numel() for p in self.parameters() if p.requires_grad),
+                "training/epochs": epochs,
+                "training/batch_size": train_loader.batch_size,
+                "training/dataset_size": len(train_loader.dataset),
+                "training/test_size": len(test_loader.dataset)
+            })
+
         progress_bar = tqdm(range(epochs), desc='Training Progress')
         for epoch in progress_bar:
             train_loss, train_acc = train_epoch(self, train_loader, criterion, optimizer)
@@ -321,16 +357,31 @@ class HybridCNNGRUWithAttention(nn.Module):
             if save_model:
                 if test_acc > best_acc:
                     best_acc = test_acc
-                torch.save(self.state_dict(), f'output/saved_models/best_gru_with_attention_model_{model_idx}.pth')
+                    model_path = f'output/saved_models/best_gru_with_attention_model_{model_idx}.pth'
+                    torch.save(self.state_dict(), model_path)
+                    if logger:
+                        logger.log({
+                            "model/best_accuracy": best_acc,
+                            "model/best_model_path": model_path
+                        })
 
             if logger:
+                # Log metrics for this epoch
                 logger.log({
                     "GRU+Attention/Train Loss": train_loss,
                     "GRU+Attention/Train Accuracy": train_acc,
                     "GRU+Attention/Test Accuracy": test_acc,
+                    "GRU+Attention/Best Accuracy": best_acc,
                     "epoch": epoch
                 })
 
+                # Log learning rate
+                current_lr = optimizer.param_groups[0]['lr']
+                logger.log({
+                    "training/learning_rate": current_lr
+                })
+
+                # Log plots
                 logger.log({
                     "GRU+Attention/Loss vs Epochs": wandb.plot.line_series(
                         xs=list(range(len(train_losses))),
@@ -348,7 +399,25 @@ class HybridCNNGRUWithAttention(nn.Module):
                     )
                 })
 
-        return train_loss, train_acc, test_acc
+        # Log final results
+        if logger:
+            logger.log({
+                "final/train_loss": train_loss,
+                "final/train_accuracy": train_acc,
+                "final/test_accuracy": test_acc,
+                "final/best_accuracy": best_acc
+            })
+
+        # Return the full history of metrics
+        return {
+            'train_losses': train_losses,
+            'train_accs': train_accs,
+            'test_accs': test_accs,
+            'final_train_loss': train_loss,
+            'final_train_acc': train_acc,
+            'final_test_acc': test_acc,
+            'best_acc': best_acc
+        }
 
 class Attention(nn.Module):
     def __init__(self, hidden_size):

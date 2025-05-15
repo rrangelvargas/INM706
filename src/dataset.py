@@ -5,9 +5,11 @@ from sklearn.model_selection import train_test_split
 import torch
 from torch.utils.data import TensorDataset, DataLoader
 from skimage.transform import resize
+import pickle
 
 classes = ['blues', 'classical','country','disco','hiphop','jazz','metal','pop','reggae','rock']
 directory = 'data/genres_original'
+PREPROCESSED_DATA_PATH = 'data/preprocessed'
 
 
 def normalize_peak(audio):
@@ -45,7 +47,46 @@ def preprocess_audio_files(directory, genres, resized_shape=(150, 150)):
     
     return np.array(spectrograms), np.array(genre_labels)
 
-def get_train_test_split(train_size=0.8, test_size=0.2, random_state=42):
+def save_preprocessed_data(X_train, X_test, y_train, y_test, random_state=42):
+    """Save preprocessed data to disk."""
+    os.makedirs(PREPROCESSED_DATA_PATH, exist_ok=True)
+    
+    data = {
+        'X_train': X_train,
+        'X_test': X_test,
+        'y_train': y_train,
+        'y_test': y_test,
+        'random_state': random_state
+    }
+    
+    with open(os.path.join(PREPROCESSED_DATA_PATH, 'preprocessed_data.pkl'), 'wb') as f:
+        pickle.dump(data, f)
+    
+    print("Preprocessed data saved successfully.")
+
+def load_preprocessed_data():
+    """Load preprocessed data from disk."""
+    data_path = os.path.join(PREPROCESSED_DATA_PATH, 'preprocessed_data.pkl')
+    
+    if not os.path.exists(data_path):
+        return None
+    
+    with open(data_path, 'rb') as f:
+        data = pickle.load(f)
+    
+    print("Preprocessed data loaded successfully.")
+    return data
+
+def get_train_test_split(train_size=0.8, test_size=0.2, random_state=42, force_reprocess=False):
+    """Get train-test split, either from saved preprocessed data or by preprocessing."""
+    
+    # Try to load preprocessed data if not forcing reprocessing
+    if not force_reprocess:
+        data = load_preprocessed_data()
+        if data is not None and data['random_state'] == random_state:
+            return data['X_train'], data['X_test'], data['y_train'], data['y_test']
+    
+    # If no saved data or force_reprocess is True, preprocess the data
     print("Preprocessing audio files...")
     spectrograms, genre_labels = preprocess_audio_files(directory, classes)
 
@@ -61,6 +102,9 @@ def get_train_test_split(train_size=0.8, test_size=0.2, random_state=42):
     print("Shape of the testing set:", X_test.shape)
     print("Shape of the training labels:", y_train.shape)
     print("Shape of the testing labels:", y_test.shape)
+
+    # Save the preprocessed data
+    save_preprocessed_data(X_train, X_test, y_train, y_test, random_state)
 
     return X_train, X_test, y_train, y_test
 

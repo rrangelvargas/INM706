@@ -14,9 +14,25 @@ This repository contains code for exploring, preprocessing, and testing a deep l
 
 *This structure ensures compatibility with all file paths used in the code.*
 
+## Installing the requirements
+
+To install the project requirements, run the setup.sh file with the command
+
+```console
+. setup.sh
+```
+
+## Training the model
+
+To train the model with the grid search, run the file main.py with the following command
+
+```python
+python src/main.py
+```
+
 ## Jupyter Notebooks
 
-#### 1. `EDA & Pre-processing.ipynb`
+### 1. `EDA & Pre-processing.ipynb`
 
 This notebook covers the full **EDA and preprocessing pipeline**, including:
   
@@ -24,15 +40,13 @@ This notebook covers the full **EDA and preprocessing pipeline**, including:
 - Segmenting audio into overlapping 4s chunks  
 - Extracting and resizing Mel spectrograms for model input  
 - Label encoding and splitting data into train/test sets  
-- Converting to PyTorch tensors and validating shapes    
+- Converting to PyTorch tensors and validating shapes
 
-#### 2. `test.ipynb`
+### 2. `test.ipynb`
 
 This notebook is used for **inference and evaluation** of the final trained model:
 
-- Load and test the final model on **new or modern audio samples** outside the GTZAN dataset  
+- Load and test the final model on **new or modern audio samples** outside the GTZAN dataset
+- Test a single file or the given sample files  
 - Evaluate **generalisation** to new musical styles or eras  
 - Check how confidently and accurately the model performs on unfamiliar data  
-
-
-

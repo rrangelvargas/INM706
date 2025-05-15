@@ -2,7 +2,6 @@
 .history/
 wandb/
 output/
-*.pth
 *.csv
 .ipynb_checkpoints/
 .history/*
