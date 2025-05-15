@@ -1,6 +1,6 @@
 ## Music Genre Classification 
 
-This repository contains code for exploring, pre-processing, and testing CNN+RNN pipelineS for music genre classification using the [GTZAN dataset](https://www.kaggle.com/datasets/andradaolteanu/gtzan-dataset-music-genre-classification?resource=download).
+This repository contains code for exploring, pre-processing, and testing CNN+RNN pipelines for music genre classification using the [GTZAN dataset](https://www.kaggle.com/datasets/andradaolteanu/gtzan-dataset-music-genre-classification?resource=download).
 
 ### Dataset Setup
 
