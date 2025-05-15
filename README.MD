@@ -16,18 +16,18 @@ This repository contains code for exploring, preprocessing, and testing a deep l
 
 ## Jupyter Notebooks
 
-### 1. `EDA & Pre-processing.ipynb`
+#### 1. `EDA & Pre-processing.ipynb`
 
-This notebook walks through the complete **exploratory data analysis (EDA)** and **preprocessing** pipeline. It includes:
+This notebook covers the full **EDA and preprocessing pipeline**, including:
 
-- Verifying genre folder structure and file counts  
+- Verifying folder structure and file counts  
 - Visualising Mel spectrograms for representative audio samples  
-- Segmenting audio into overlapping chunks (e.g., 4s with 2s overlap)  
+- Segmenting audio into overlapping 4s chunks  
 - Extracting and resizing Mel spectrograms for model input  
 - Label encoding and splitting data into train/test sets  
-- Converting to PyTorch tensors and validating shapes  
+- Converting to PyTorch tensors and validating shapes    
 
-### 2. `test.ipynb`
+#### 2. `test.ipynb`
 
 This notebook is used for **inference and evaluation** of the final trained model:
 
