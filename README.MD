@@ -19,8 +19,7 @@ This repository contains code for exploring, preprocessing, and testing a deep l
 #### 1. `EDA & Pre-processing.ipynb`
 
 This notebook covers the full **EDA and preprocessing pipeline**, including:
-
-- Verifying folder structure and file counts  
+  
 - Visualising Mel spectrograms for representative audio samples  
 - Segmenting audio into overlapping 4s chunks  
 - Extracting and resizing Mel spectrograms for model input  
@@ -31,7 +30,7 @@ This notebook covers the full **EDA and preprocessing pipeline**, including:
 
 This notebook is used for **inference and evaluation** of the final trained model:
 
-- Load and test the model on **new or modern audio samples** outside the training set  
+- Load and test the final model on **new or modern audio samples** outside the GTZAN dataset  
 - Evaluate **generalisation** to new musical styles or eras  
 - Check how confidently and accurately the model performs on unfamiliar data  
 
