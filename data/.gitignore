@@ -3,4 +3,5 @@
 !test_files/
 !test_files/*
 !test_files/**/*
-
+!models
+!models/*
